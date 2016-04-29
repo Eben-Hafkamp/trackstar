@@ -1,0 +1,398 @@
+.heading-title { display: none; }
+.item-pane { display: none; }
+
+// The user's avatar and some basic information
+.heading {
+  height: 8em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: $font-body;
+  font-size: 14px;
+  .heading-avatar {
+    padding: 1em;
+  }
+  .heading-text {
+    display: flex;
+    flex-direction: column;
+    .name {
+      color: white;
+      font-weight: bold;
+    }
+    br {
+      content: "";
+      margin: .4em 0;
+    }
+    span { color:#bdbdbd; }
+  }
+}
+
+// A bar with 4 categories which split the items in the accordian wrapper into various states
+.category-bar {
+  height:5.25em;
+  display: flex;
+  flex-direction: row;
+  background: #f5f5f5;
+  box-shadow: 0px 2px 3px rgba(32,32,47,0.65);
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .category {
+    flex: 1 0 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-body;
+    font-size: 14px;
+    transition: ease-in-out all .2s;
+    .count {
+      font-size: 30px;
+    }
+    span:last-child { color:#727272 }
+  }
+
+  #blue-toggle:checked + .b { @extend .blue-back; }
+  #yellow-toggle:checked + .y { @extend .yellow-back; }
+  #green-toggle:checked + .g { @extend .green-back; }
+  #red-toggle:checked + .r { @extend .red-back; }
+}
+
+// A toggle to view the library or a summary of analytics behind the library
+.toggle {
+  height: 3em;
+  padding: 0 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #757575;
+  h4 { font-weight: 100; }
+  h4.active {
+    font-weight: 100;
+    color: #4cb6ac;
+  }
+}
+
+// This will be where all of our library items are displayed in an accordian manner
+.item-wrapper {
+  .item-accordian {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0,0,0,0.48);
+    .accordian-title {
+      height: 2.2em;
+      display: flex;
+      .color {
+        flex: 0 0 .8em;
+      }
+      span {
+        width: calc(100% - 6.8em);
+        align-self: center;
+        padding: 0 1.5em;
+        font-family: $font-body;
+        font-size: 14px;
+        color: white;
+      }
+      .expand {
+        height: 100%;
+        flex: 0 0 2em;
+        align-self: center;
+        background-image: url('../images/ellipsis.png');
+        background-size: 1.5em;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .contract {
+        @extend .expand;
+        background-image: url('../images/up.png');
+        background-size: 1.2em;
+      }
+    }
+    .item {
+      padding: .5em 1em 1em 2em;
+      p {
+        font-family: $font-body;
+        font-size: 14px;
+        color: white;
+        span { color:#26A599; }
+      }
+      .item-info {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: row;
+        .item-img {
+          width: 3.5em;
+          height: 3.5em;
+        }
+        p {
+          flex: 1 0 0;
+          line-height: 1.4em;
+          font-family: $font-body;
+          span:first-child { color: #ee5250; }
+          span {
+            margin-left: 1em;
+            display: block;
+            font-size: 12px;
+            color: white;
+          }
+        }
+        .delete {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+  .item-accordian:nth-child(n+2) { margin-top: .1em; }
+}
+
+@include respond-to('tablet-landscape') {
+
+  // heading for tablet in landscape mode encapsulating the user information and the category bar in the same row
+  .heading-lrg-srn {
+    height: 7em;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    box-shadow: 0px 2px 3px rgba(32,32,47,0.65);
+    .heading {
+      flex: 1 0 30%;
+      height: 100%;
+      background:#f5f5f5;
+      img { height: 6em; }
+      .heading-text {
+        span {
+          color: #727272;
+        }
+        .name {
+          font-family: $font-heading;
+          color: #747474;
+        }
+      }
+    }
+    .category-bar {
+      flex: 1 0 70%;
+      height: 100%;
+      box-shadow: none;
+      .category {
+        flex: 0 0 25%;
+      }
+    }
+  }
+
+  // A toggle to view the library or a summary of analytics behind the library
+  .toggle {
+    h4 { font-size: 1.2em; font-weight: 0; }
+  }
+
+};
+
+@include respond-to('small-desktop') {
+
+  // Title bars for both sections of the heading-lrg-srn class below
+  .heading-title {
+    width: 100%;
+    height: 1.5em;
+    padding: 1.5em 0 0;
+    display: block;
+    font-family: $font-heading;
+    font-size: 16px;
+    color: rgb(117,117,117);
+  }
+
+  // Wraps the heading and category-bar on larger viewports
+  .heading-lrg-srn {
+
+    height: 12em;
+    flex: 0 0 calc(100vw - 12em);
+    margin: -1em 0 0 -2em;
+    flex-direction: row-reverse;
+
+    .heading {
+      align-content: flex-start;
+      flex-wrap: wrap;
+      flex: 1 0 calc(40% - 2em);
+      padding-left: 2em;
+      border-left: thin solid #CFD8DC;
+      img { height: 8em; }
+    }
+
+    .category-bar {
+      align-content: flex-start;
+      flex-wrap: wrap;
+      flex: 1 0 calc(60% - 2em);
+      padding-left: 2em;
+      background:#ECEFF1;
+
+      .category {
+        flex: 0 0 20%;
+        height: 7.5em;
+        margin: 1em auto 0 0;
+        border: thin solid #CACAD9;
+        border-radius: 1em;
+        background: white;
+        .count {
+          font-size: 2.5em;
+        }
+        span:last-child {
+          padding-top: .5em;
+        }
+      }
+    }
+
+  }
+
+  // A toggle to view the library or a summary of analytics behind the library
+  .toggle {
+    flex: 0 0 calc(100vw - 14em);
+    margin-top: 1em;
+    padding: 0 0;
+    font-size: 1.3em;
+    font-weight: lighter;
+  }
+
+  // Wraps the item-wrapper and search-bar in a column flex on larger viewports
+  .item-lrg-srn {
+    flex: 1 0 calc(60% - 6em);
+    padding-right: 2em;
+
+    .item-wrapper {
+      .item-accordian.active {
+        width: 100%;
+        background: transparentize(black, .3);
+      }
+      .item-accordian {
+        width: 98%;
+        display: flex;
+        flex-direction: column;
+        background: rgba(0,0,0,0.48);
+        .accordian-title {
+          height: 2.2em;
+          display: flex;
+          .color {
+            flex: 0 0 .8em;
+          }
+          span {
+            width: calc(100% - 6.8em);
+            align-self: center;
+            padding: 0 1.5em;
+            font-family: $font-body;
+            font-size: 14px;
+            color: white;
+          }
+          .expand {
+            height: 100%;
+            flex: 0 0 2em;
+            align-self: center;
+            background-image: url('../images/ellipsis.png');
+            background-size: 1.5em;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+          .contract {
+            @extend .expand;
+            background-image: url('../images/up.png');
+            background-size: 1.2em;
+          }
+        }
+        .item {
+          padding: .5em 1em 1em 2em;
+          p {
+            font-family: $font-body;
+            font-size: 14px;
+            color: white;
+            span { color:#26A599; }
+          }
+          .item-info {
+            margin-top: 1em;
+            display: flex;
+            flex-direction: row;
+            .item-img {
+              width: 3.5em;
+              height: 3.5em;
+            }
+            p {
+              flex: 1 0 0;
+              line-height: 1.4em;
+              font-family: $font-body;
+              span:first-child { color: #ee5250; }
+              span {
+                margin-left: 1em;
+                display: block;
+                font-size: 12px;
+                color: white;
+              }
+            }
+            .delete {
+              align-self: flex-end;
+            }
+          }
+        }
+      }
+      .item-accordian:nth-child(n+2) { margin-top: .1em; }
+    }
+
+  }
+
+  // A window that reflects the active item's content. Only available on larger viewports
+  .item-pane {
+    flex: 1 0 calc(40% - 7em);
+    margin-right: 2em;
+    padding: 1em 1em 1em 2em;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-body;
+    color: transparentize(white, .3);
+    background: transparentize(black, .3);
+    box-shadow: 6px 6px 20px -5px rgba(0,0,0,0.75);
+
+      .pane-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        h4 {
+          font-size: 1.3em;
+          font-weight: lighter;
+          margin-bottom: 1em;
+        }
+      }
+
+      .pane-body {
+        width: calc(100% - 1em);
+        height: 8em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p {
+          font-size: 14px;
+          span { color: $primary-color; }
+        }
+        img {
+          align-self: center;
+        }
+      }
+
+      hr {
+        width: calc(100% - 1em);
+        border: 0;
+        height: 0;
+        border-bottom: thin solid rgba(255, 255, 255, 0.2);
+      }
+
+      span {
+        margin: 1.5em 0 0 0;
+      }
+
+      .user {
+        margin: 3em 0 1em;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        span {
+          margin: 0 0 0 1em;
+        }
+      }
+
+  }
+};

@@ -1,0 +1,44 @@
+.member-wrapper {
+  @extend .item-wrapper;
+  .member-accordian {
+    @extend .item-accordian;
+    .m-accordian-title {
+      @extend .accordian-title;
+      .initial {
+        flex: 0 0 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'ArialRound';
+        font-size: 20px;
+        color: white;
+      }
+      span {
+        width: calc(100% - 9em);
+      }
+      .expand {  }
+    }
+    .item {
+      .member-info {
+        @extend .item-info;
+        display: flex;
+        flex-direction: column;
+        .m-info-divider {
+          display: flex;
+          p {
+            span{ color: #a8a8b7; }
+          }
+        }
+        .m-info-divider:last-child {
+          margin-top: 1em;
+          justify-content: space-between;
+          span {
+            margin-top: .4em;
+            font-size: 14px;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

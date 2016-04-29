@@ -1,0 +1,125 @@
+nav {
+  width: calc(100vw - 2em);
+  height: 3em;
+  display: flex;
+  position: fixed;
+  top:0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em;
+  background: $primary-color;
+  font-family: $font-heading;
+  color: white;
+  box-shadow:1px 1px 4px rgba(0,0,0,0.65);
+  z-index: 200;
+
+  img { display: none; }
+
+  .burger { // The container for the burger bars
+    margin: 5px;
+    display: inline-block;
+    width: 2em;
+    height: 2.2em;
+    z-index: 100;
+    span, span:before, span:after { // Creates a visible bar and 2 visible psuedo bars
+      display: block;
+      width: 100%;
+      height: 5px;
+      background: white;
+      transition: all 0.5s;
+      backface-visibility: hidden;
+    }
+    span { // Controls the position of the bar
+      position: relative;
+      margin: 1em 0;
+    }
+    span:before, span:after {
+      position: absolute;
+      content: "";
+    }
+    span:before { // Moves a psuedo bar to the bottom
+      top: 10px;
+    }
+    span:after { // Moves a psuedo bar to the top
+      top: -10px;
+    }
+  }
+
+  .selected { // Controls the rotation and background of the bars to create 'X'
+    span:before {
+      transform: translate(0px, -10px) rotate(-90deg);
+      background: #E57373;
+    }
+    span:after {
+      transform: translate(0px, 10px) rotate(-90deg);
+      background: #E57373;
+    }
+    span {
+      transform: rotate(45deg);
+      background: #E57373;
+    }
+  }
+}
+
+@include respond-to('small-desktop') {
+
+  nav {
+    width: 12em;
+    height: 100vh;
+    padding: 0;
+    left:0;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: transparentize(black, .3);
+    box-shadow:1px 1px 4px rgba(0,0,0,0.65);
+
+    img {
+      display: block;
+      margin: 4em auto 4em;
+    }
+
+    h3 { display: none; }
+
+    .burger { display: none; }
+
+    #overlay.hide { display: flex; }
+
+    #overlay {
+      width: 100%;
+      position: relative;
+      background: 0;
+      #menu {
+        width: 10em;
+        padding: 1em 0;
+        position: relative;
+        top: 0;
+        right: 0;
+        border-radius: 0;
+        background: 0;
+        box-shadow: none;
+        a:-webkit-any-link { color: #BDBDBD; }
+        li {
+          width: 100%;
+          padding-left: 2em;
+          font-family: $font-heading;
+          font-size: 1.125em;
+          line-height: 3em;
+          color: white;
+          transition: ease-in-out .1s;
+        }
+        li:first-child {
+          background: $primary-color;
+          a:-webkit-any-link {
+            color: white;
+          }
+        }
+        li:hover {
+          width: 97.2%;
+          cursor: pointer;
+          background: transparentize(white, .9);
+        }
+      }
+    }
+  }
+
+};
